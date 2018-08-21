@@ -34,14 +34,14 @@
   /* Set up the map with initial center and zoom level */
   var map = L.map('map', {
     center: [41.77, -72.69], // EDIT latitude, longitude to re-center map
-    zoom: 12,  // EDIT from 1 to 18 -- decrease to zoom out, increase to zoom in
-    scrollWheelZoom: false
+    zoom: 10,  // EDIT from 1 to 18 -- decrease to zoom out, increase to zoom in
+    scrollWheelZoom: true
   });
 
   /* Control panel to display map layers */
   var controlLayers = L.control.layers( null, null, {
   position: "topright",
-  collapsed: true
+  collapsed: false
   }).addTo(map);
 
   /* Carto light-gray basemap tiles with labels */
