@@ -25,7 +25,7 @@
 <body>
 
   <!-- Display the map and title with HTML division tags  -->
-  <div id="map-title">EDIT your map title</div>
+  <div id="map-title">Schools in Hartford, CT</div>
   <div id="map"></div>
 
   <!-- Create the map content with JavaScript (.js) -->
@@ -39,10 +39,10 @@
   });
 
   /* Control panel to display map layers */
-  // var controlLayers = L.control.layers( null, null, {
-  //  position: "topright",
-  //  collapsed: false
-  // }).addTo(map);
+  var controlLayers = L.control.layers( null, null, {
+  position: "topright",
+  collapsed: true
+  }).addTo(map);
 
   /* Carto light-gray basemap tiles with labels */
   var light = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
@@ -53,7 +53,7 @@
   /* Stamen colored terrain basemap tiles with labels */
   var terrain = L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png', {
     attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
-  }); // EDIT - insert or remove ".addTo(map)" before last semicolon to display by default
+  }).addTo(map); // EDIT - insert or remove ".addTo(map)" before last semicolon to display by default
   // controlLayers.addBaseLayer(terrain, 'Stamen Terrain basemap');
 
   /* Display a blue point marker with pop-up text */
@@ -61,16 +61,16 @@
   .bindPopup("Insert pop-up text here"); // EDIT pop-up text message
 
   /* Upload Latitude/Longitude markers from data.csv file, show Title in pop-up, and override initial center and zoom to fit all in map */
-  // var customLayer = L.geoJson(null, {
-  //  onEachFeature: function(feature, layer) {
-  //    layer.bindPopup(feature.properties.Title);
-  //  }
-  // });
-  // var runLayer = omnivore.csv('data.csv', null, customLayer)
-  // .on('ready', function() {
-  //  map.fitBounds(runLayer.getBounds());
-  // }).addTo(map);
-  // controlLayers.addOverlay(customLayer, 'Markers from data.csv');
+  var customLayer = L.geoJson(null, {
+   onEachFeature: function(feature, layer) {
+     layer.bindPopup(feature.properties.Title);
+   }
+  });
+  var runLayer = omnivore.csv('data.csv', null, customLayer)
+   .on('ready', function() {
+    map.fitBounds(runLayer.getBounds());
+ }).addTo(map);
+  controlLayers.addOverlay(customLayer, 'Markers from data.csv');
 
   </script>
 </body>
